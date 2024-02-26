@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Project  2</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script type="text/javascript"
+          src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js">
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css">
+    <link href="../../assets/styles/article.css" rel="stylesheet" type="text/css" /> 
+</head>
+
+<body class=umt-article>
+    <nav id="course-nav">
+      <ul>
+      </ul>
+    </nav>
+
+    <div class="umt-content">
+      <div><section data-level="h1"><h1>Project  2</h1><p><strong>Due</strong>: Mar 1, before midnight.
+</p><p><strong>Important Reminder</strong>: As per the course
+
+<a href="../../misc/academic-honesty/academic-honesty-policy.html">Academic Honesty Policy</a>, cheating of any kind will minimally
+result in your letter grade for the entire course being reduced by one
+level.
+</p><p>This document first provides the aims of this project.  It then
+describes the requirements as explicitly as possible.  It lists the
+files with which you have been provided.  Finally, it hints at how
+these requirements can be met.
+</p><section data-level="h2"><h2>Aims</h2><p>The aims of this project are as follows:
+</p><ul><li><p>To expose you to memory allocation.
+</p></li><li><p>To give you some familiarity with programming in a low-level
+    language.
+</p></li></ul></section><section data-level="h2"><h2> <span id="require">Requirements</span></h2><p>Implement a program which can add together some number of pairs of
+vectors having arbitrary size.  The program must be implemented in
+either C, C++ or Rust using the <code>gcc</code>, <code>g++</code> or <code>cargo</code>/<code>rustc</code>
+toolchains available on <code>remote.cs</code>.  Specifically, you must submit a
+zip file which will unpack into a <code>prj2-sol</code> directory which will
+minimally contain two shell scripts:
+</p><dl><dt> <code>prj2-sol/make.sh</code> </dt><dd><p>    Running this script from <strong>any</strong> directory should build your
+    program.
+</p></dd><dt> <code>prj2-sol/run.sh</code> </dt><dd><p>    When run from <strong>any</strong> directory, this program should run the program
+    built by <code>make.sh</code>.  It should require two positive integer
+    arguments:
+</p><dl><dt> <code>N_OPS</code> </dt><dd><p>        The number of additions to be performed.
+</p></dd><dt> <code>N_ENTRIES</code> </dt><dd><p>        The number of entries in each vector.
+</p></dd></dl><p>    The program should read <code>N_OPS</code> pairs of vectors
+    from standard input.  Each vector is specified as <code>N_ENTRIES</code>
+    numbers separated by whitespace.  After each pair of vectors
+    is read, the program should write the pairwise sum of the
+    two vectors on standard output as follows:
+</p><ul><li><p>Each entry in the sum vector is followed by a single
+         space <code>' '</code> character.
+</p></li><li><p>The output for each sum vector is followed by two
+         newline <code>'\n'</code> characters.
+</p></li></ul><p>     The program should terminate after performing <code>N_OPS</code> of
+     these additions.
+</p><p>     [It follows that the program will read a total of <code>N_OPS * 2 *
+     N_ENTRIES</code> from standard input and will write out a total <code>2 *
+     N_OPS</code> lines to standard output with each non-empty line
+     containing <code>N_ENTRIES</code> numbers, each followed by a single space
+     <code>' '</code>].
+</p></dd></dl><p>Your program is subject to the following implementation restrictions:
+</p><ul><li><p>Your program <strong>must</strong> allocate memory for the two addend vectors
+    and the sum vector on the heap.  (The use of C's variable-length
+    arrays VLAs is not acceptable).
+</p></li><li><p>All memory dynamically allocated by your code must be explicitly
+    released before program termination.
+</p></li><li><p>The sum must first be computed into the sum vector before being
+    written to standard output.
+</p></li><li><p>Your program should not assume any maximum limits on <code>N_ENTRIES</code>
+    beyond those dictated by available memory.
+</p></li></ul><p>There is no requirement that your program be 100% robust in reacting
+to errors, but &quot;reasonable<code></code>&quot; precautions should be taken. (This
+relaxation for error handling is primarily motivated by the difficulty
+in handling formatted input in Rust).
+</p><p>Your submitted zip file should not contain any binaries or garbage
+files unrelated to the functionality of your project.
+</p><p>You may assume that your project will be run in a standard Linux
+enviroment having the above tool chains.  If in doubt about whether
+a particular tool will be available, please check with me.
+</p></section><section data-level="h2"><h2>Provided Files</h2><p>The  <a href="./prj2-sol">prj2-sol</a> directory contains:
+</p><dl><dt>  <a href="./prj2-sol/make.sh?lang=sh">make.sh</a> and  <a href="./prj2-sol/run.sh?lang=sh">run.sh</a> </dt><dd><p>    Starter files for the shell scripts you are required to submit.
+</p><p>    [These are similar to those you were given for your last project,
+    except that they have been hardened against being symlinked.]
+</p></dd><dt>  <a href="./prj2-sol/README">README</a></dt><dd><p>    A README file which must be submitted along with your project.  It
+    contains an initial header which you must complete (replace the
+    dummy entries with your name, B-number and email address at which
+    you would like to receive project-related email).  After the
+    header you may include any content which you would like read
+    during the grading of your project.
+</p></dd></dl><p>The  <a href="./extras">extras</a> directory contains auxiliary files associated
+with the project, including files which can help with testing your
+project.
+</p><dl><dt>  <a href="extras/tests">tests</a> </dt><dd><p>    A directory containing tests.  There are two kinds of test files:
+</p><dl><dt> <code>*.test</code> </dt><dd><p>      A test input for which your program is expected to succeed.
+</p></dd><dt> <code>*.out</code> </dt><dd><p>      The expected pretty-printed output for a successful test of
+      the corresponding <code>*.test</code> file.
+</p></dd></dl></dd><dt>  <a href="extras/do-tests.sh?lang=sh">do-tests.sh</a> </dt><dd><p>    A shell script which can be used for running the above tests.
+    It can be invoked from any directory and takes up to two arguments:
+</p><ol><li><p>The path to your <code>run.sh</code> shell script.  
+</p></li><li><p>An optional argument giving the path to a single test
+         to be run.
+</p></li></ol><p>    If invoked with only a single argument, the script will run
+    all tests.  If invoked with a second argument, then it will
+    run only the test specified by that argument.
+</p><p>    [Note that this script invokes your <code>run.sh</code> shell script with
+    arguments derived from the name of the <code>*.test</code> file being run].
+</p></dd><dt>  <a href="extras/LOG?lang=sh">LOG</a> </dt><dd><p>    A log file illustrating the operation of the project.
+</p></dd></dl></section><section data-level="h2"><h2>Hints</h2><p>This section is not prescriptive in that you may choose to ignore
+it as long as you meet all the project requirements.
+</p><p>You may proceed as follows:
+</p><ol><li><p>Review the material covered in class on
+     <a href="../../slides/runtime/runtime.html">Runtime</a> and the
+     <a href="../../slides/runtime/code/matmul">matrix multiplication</a>
+    example in particular.  
+</p></li><li><p>Read the project requirements thoroughly.
+</p></li><li><p>Choose the implementation language for your project.  Some
+    considerations:
+</p><ul><li><p>C is a simpler language than either C++ or Rust.
+</p></li><li><p>Both Rust and C++ are opiniated about how heap memory
+        should be managed; C is not.
+</p></li><li><p>Rust is the newer language and has had less time
+        to accumulate legacy cruft.
+</p></li><li><p>The demand for Rust skills may be lower than that for
+        the other two languages, but it is growing fast.  In
+	general, all three languages are popular.
+</p></li></ul></li><li><p>Carefully study the  <a href="../../slides/runtime/code/matmul">matrix
+    multiplication</a> code for your chosen implementation language and
+    think about what you need to do to adapt that code to handle this
+    simpler project.
+</p></li><li><p>Copy over the provided <code>prj2-sol</code> directory to your work
+    directory.
+</p></li><li><p>Copy over files from the matrix multiplication example for
+    your chosen implementation language.  Rename files if necessary.
+</p></li><li><p>Start making changes to the files.
+</p><ul><li><p>First change the project build files to reference a vector
+        addition project (rather than a matrix multiplication
+        project).  Change your <code>make.sh</code> to run the build process.
+</p><p>        [If editing a <code>Makefile</code>, please make sure that all lines
+	which contain shell commands start with a tab character].
+</p></li><li><p>If the code is based on multiple files (true for the C and C++
+        matrix multiplication examples), then start with the files
+        corresponding to lower-level code.  As you finish with a file,
+        check it for compilations errors using something like <code>make</code>
+        <em>file</em><code>.o</code>.
+</p></li></ul></li><li><p>Ensure that your entire project compiles without <strong>any</strong> warnings.
+</p></li><li><p>Update your <code>run.sh</code> to run your executable.  Note that you can
+    use the shell variable <code>$@</code> to refer to the arguments your script
+    was invoked with.
+</p></li><li><p>Test your project via the command line as in the provided
+     <a href="extras/LOG?lang=sh">LOG.</a>
+</p></li><li><p>Test your parser using the provided scanner tests:
+</p><pre class="hljs language-sh">    $ ~/cs571/projects/prj2/extras/do-tests.sh run.sh
+</pre><p>    Debug any failing tests.  Note that you can run a single test by
+    adding an additional argument to the above command providing the
+    path to the failing test.
+</p></li><li><p>Iterate until you meet all requirements.
+</p></li><li><p>Submit as in your previous project (the submission link should be
+    available on gradescope next week).  Use the
+     <a href="../../bin/do-zip.sh?lang=sh">~/cs571/bin/do-zip.sh</a> script
+    along with a <code>.zipignore</code> to ensure that you do not submit
+    binaries or garbage files.
+</p></li></ol><p>If using git, it is always a good idea to keep committing your
+project periodically to ensure that you do not accidentally lose work.
+</p></section></section></div>
+    </div>
+
+    <script type="module" src="../../assets/scripts/slide-controls.mjs"></script>
+    <script type="module" src="../../assets/scripts/nav.mjs"></script> 
+    <script type="module" src="../../assets/scripts/highlight.mjs"></script>
+</body>
+</html>
+
