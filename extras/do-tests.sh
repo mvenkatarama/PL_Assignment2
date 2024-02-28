@@ -41,7 +41,7 @@ do
 	echo "`basename $t` ok"
 	rm $out
     else
-	echo "test $t failed; output in $out"
+	echo "\ntest $t failed; output in $out"
 	echo "run 'diff $gold $out' to see differences"
     fi
 done

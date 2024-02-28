@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -15,7 +16,11 @@ int main(int argc, char* argv[])
     // std::cout << N_OPS << "\n";
     // std::cout << N_ENTRIES << "\n";
 
-    int arr1[N_ENTRIES], arr2[N_ENTRIES], result[N_ENTRIES];
+    // int arr1[N_ENTRIES], arr2[N_ENTRIES], result[N_ENTRIES];
+
+    std::unique_ptr<int[]> arr1 = std::make_unique<int[]>(N_ENTRIES);
+    std::unique_ptr<int[]> arr2 = std::make_unique<int[]>(N_ENTRIES);
+    std::unique_ptr<int[]> result = std::make_unique<int[]>(N_ENTRIES);
 
 
     for(int i=0; i<N_OPS; i++) {
@@ -31,9 +36,9 @@ int main(int argc, char* argv[])
         for(int j=0; j<N_ENTRIES; j++) {
             std::cout << result[j] << " ";
         }
-        std::cout <<"\n\n\n";
+        std::cout <<"\n\n";
     }
 
-    std::cout << "\n";
+    // std::cout << "\n";
     return 0;
 }
